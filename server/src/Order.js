@@ -1,4 +1,4 @@
-class OrderItem {
+class Order {
   constructor(id, items, total, status) {
     this.id = id;
     this.items = items;
@@ -7,4 +7,4 @@ class OrderItem {
   }
 }
 
-module.exports(OrderItem);
+module.exports = Order;

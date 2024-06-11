@@ -6,17 +6,20 @@ import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import Navbar from "./components/Navbar";
 import { CartProvider } from "./context/CartContext";
+import { MenuProvider } from "./context/MenuContext";
 
 export default function App() {
   return (
-    <CartProvider>
-      <Navbar />
-      <Container className="mb-4">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/menu" element={<Menu />} />
-        </Routes>
-      </Container>
-    </CartProvider>
+    <MenuProvider>
+      <CartProvider>
+        <Navbar />
+        <Container className="mb-4">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/menu" element={<Menu />} />
+          </Routes>
+        </Container>
+      </CartProvider>
+    </MenuProvider>
   );
 }

@@ -23,7 +23,7 @@ const menuItems = [
     "Caesar Salad",
     "Fresh romaine lettuce, parmesan cheese, croutons, and Caesar dressing.",
     60,
-    true,
+    false,
     0
   ),
   new MenuItem(

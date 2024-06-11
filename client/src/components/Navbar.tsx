@@ -1,7 +1,7 @@
 import { Button, Container, Nav, Navbar as NavbarBs } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
-function Navbar() {
+export default function Navbar() {
   return (
     <NavbarBs sticky="top" className="bg-white shadow-sm mb-3">
       <Container>
@@ -49,5 +49,3 @@ function Navbar() {
     </NavbarBs>
   );
 }
-
-export default Navbar;

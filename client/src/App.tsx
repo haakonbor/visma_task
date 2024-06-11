@@ -5,10 +5,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import Navbar from "./components/Navbar";
+import { CartProvider } from "./context/CartContext";
 
-function App() {
+export default function App() {
   return (
-    <>
+    <CartProvider>
       <Navbar />
       <Container className="mb-4">
         <Routes>
@@ -16,8 +17,6 @@ function App() {
           <Route path="/menu" element={<Menu />} />
         </Routes>
       </Container>
-    </>
+    </CartProvider>
   );
 }
-
-export default App;

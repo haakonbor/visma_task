@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useContext, useState } from "react";
 import Cart from "../components/Cart";
-import { CartItemType } from "../components/CartItem";
+import CartItem, { CartItemType } from "../components/CartItem";
 
 type CartProviderProps = {
   children: ReactNode;
@@ -13,6 +13,7 @@ type CartContextType = {
   incrementCartQuantity: (id: string) => void;
   decrementCartQuantity: (id: string) => void;
   removeFromCart: (id: string) => void;
+  clearCart: () => void;
 
   cartQuantity: number;
   cartItems: CartItemType[];
@@ -97,6 +98,10 @@ export function CartProvider({ children }: CartProviderProps) {
     });
   }
 
+  function clearCart() {
+    setCartItems([]);
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -106,6 +111,7 @@ export function CartProvider({ children }: CartProviderProps) {
         incrementCartQuantity,
         decrementCartQuantity,
         removeFromCart,
+        clearCart,
         cartItems,
         cartQuantity,
       }}

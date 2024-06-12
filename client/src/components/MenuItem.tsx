@@ -1,4 +1,4 @@
-import { Button, Col } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useCart } from "../context/CartContext";
 
 export type MenuItemType = {

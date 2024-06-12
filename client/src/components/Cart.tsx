@@ -1,15 +1,19 @@
-import { Offcanvas, Stack } from "react-bootstrap";
+import { Button, Offcanvas, Stack } from "react-bootstrap";
 import { useCart } from "../context/CartContext";
-import CartItem, { CartItemType } from "./CartItem";
+import CartItem from "./CartItem";
 import { useMenu } from "../context/MenuContext";
+import { useNavigate } from "react-router-dom";
+
+const BASE_URL = "http://localhost:3000";
 
 type CartProps = {
   cartIsOpen: boolean;
 };
 
 export default function Cart({ cartIsOpen }: CartProps) {
-  const { closeCart, cartItems } = useCart();
+  const { closeCart, clearCart, cartItems } = useCart();
   const { menuItems } = useMenu();
+  const navigate = useNavigate();
 
   function calculateCart() {
     let spicyOrder = false;
@@ -38,6 +42,41 @@ export default function Cart({ cartIsOpen }: CartProps) {
 
   const { sum, discount, spicyOrder } = calculateCart();
 
+  async function placeOrder() {
+    const orderItems = cartItems.map((item) => ({
+      id: item.id,
+      quantity: item.quantity,
+    }));
+
+    const orderDetails = {
+      items: orderItems,
+      total: discount ? sum - discount : sum,
+      status: "pending",
+    };
+
+    try {
+      const response = await fetch(`${BASE_URL}/order`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderDetails),
+      });
+
+      if (response.ok) {
+        const order = await response.json();
+        clearCart();
+        closeCart();
+        navigate(`/order/${order.id}`);
+      } else {
+        alert("Failed to place order.");
+      }
+    } catch (error) {
+      console.error("Error placing order:", error);
+      alert("An error occurred while placing the order.");
+    }
+  }
+
   return (
     <Offcanvas show={cartIsOpen} onHide={closeCart} placement="end">
       <Offcanvas.Header closeButton>
@@ -57,6 +96,7 @@ export default function Cart({ cartIsOpen }: CartProps) {
           <div className="ms-auto fw-bold fs-5">
             Total: {discount ? sum - discount : sum} kr
           </div>
+          <Button onClick={placeOrder}>Place order</Button>
         </Stack>
       </Offcanvas.Body>
     </Offcanvas>

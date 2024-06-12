@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
+import Order from "./pages/Order";
 import Navbar from "./components/Navbar";
 import { CartProvider } from "./context/CartContext";
 import { MenuProvider } from "./context/MenuContext";
@@ -19,6 +20,9 @@ export default function App() {
             <Route path="/menu" element={<Menu />} />
           </Routes>
         </Container>
+        <Routes>
+          <Route path="/order/:id" element={<Order />}></Route>
+        </Routes>
       </CartProvider>
     </MenuProvider>
   );

@@ -1,4 +1,4 @@
-import React, {
+import {
   createContext,
   useContext,
   useState,
@@ -37,8 +37,12 @@ export function MenuProvider({ children }: MenuProviderProps) {
 
       try {
         const response = await fetch(`${BASE_URL}/menu`);
-        const menuData = (await response.json()) as MenuItemType[];
-        setMenuItems(menuData);
+        if (response.ok) {
+          const menuData = (await response.json()) as MenuItemType[];
+          setMenuItems(menuData);
+        } else {
+          alert("Failed to load menu");
+        }
       } catch (e: any) {
         setError(e.message);
       } finally {

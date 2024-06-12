@@ -1,4 +1,4 @@
-# VISMA interview task - Restaurant ordering system
+# Restaurant ordering system
 
 ## How to run:
 

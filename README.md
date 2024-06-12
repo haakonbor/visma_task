@@ -12,5 +12,5 @@
 
 1. Navigate to the client directory `cd client`
 2. Install client dependencies (seen in client/package.json) `npm i ... `
-3. Start the client in dev mode: `npm run dev'`
+3. Start the client in dev mode: `npm run dev`
 4. Open a browser and enter the localhost link specified by Vite in the console to view the web application
